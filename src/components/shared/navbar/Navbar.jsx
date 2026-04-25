@@ -2,6 +2,7 @@ import React from 'react';
 import ActiveNav from './ActiveNav';
 import Image from 'next/image';
 import Logo from '../../../assets/asset/user.png'
+import Link from 'next/link';
 const Navbar = () => {
   const links = 
   <div className='flex justify-center gap-6'>
@@ -31,7 +32,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn btn-primary font-bold w-25">Log In</a>
+    <Link href={''} className="btn btn-primary font-bold w-25">Log Out</Link>
   </div>
   </div>
   </div>

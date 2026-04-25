@@ -8,7 +8,7 @@ import playgroundImg from '../../../assets/asset/Group 48095481.png'
 import bgImg from '../../../assets/asset/Group 48095485.png';
 const RightSidebar = () => {
   return (
-    <div className='border border-black'>
+    <div>
       {/* Register */}
       <div className=''>
       <h3 className='font-semibold text-[20px] mb-4'>Register With</h3>

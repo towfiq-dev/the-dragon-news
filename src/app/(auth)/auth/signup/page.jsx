@@ -1,13 +1,28 @@
 'use client'
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {register, handleSubmit, formState: {errors}} = useForm()
-  
-  const onSubmit = (data)=>{
-  console.log(data, 'data');
+  const router = useRouter()
+  const onSubmit = async(data)=>{
+
   const {email, name, photo, password } = data
+  const {data: res, error} = await authClient.signUp.email({
+    name: name,
+    email: email,
+    password: password,
+    image: photo
+  })
+  if (res) {
+    toast.success(`Congratulations ${name}! You have successfully signed up.`);
+    router.push('/')
+  }if (error) {
+    toast.error(error.message || "Something went wrong. Please try again.");
+  }
   
   }
   return (

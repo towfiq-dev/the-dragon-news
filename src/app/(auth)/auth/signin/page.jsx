@@ -1,13 +1,28 @@
 'use client'
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = (data)=>{
-  console.log(data, 'data');
-  
-  
+  const router = useRouter()
+  const onSubmit = async(data)=>{
+  const {email, password } = data
+  const {data: res, error} = await authClient.signIn.email({
+    email: email,
+    password: password,
+    //callbackURL: '/'
+  })
+
+  if(res){
+   toast.success('Congratulation. you are successfully sigh in')
+   router.push('/')
+  }if (error) {
+    toast.error(error.message || "Something went wrong. Please try again.");
+  }
+
   }
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-[#F3F3F3] py-12 px-4">
