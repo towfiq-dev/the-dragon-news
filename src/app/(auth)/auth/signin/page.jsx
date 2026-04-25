@@ -1,6 +1,14 @@
+'use client'
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = (data)=>{
+  console.log(data, 'data');
+  
+  
+  }
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-[#F3F3F3] py-12 px-4">
       <div className="max-w-md w-full bg-white p-10 rounded-lg shadow-sm">
@@ -9,18 +17,23 @@ const Login = () => {
         </h2>
         <hr className="mb-8 border-gray-200" />
         
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <label className="block text-gray-700 font-semibold mb-2">
               Email address
             </label>
             <input
               type="email"
-              name="email"
+              {...register("email", {
+                required: "Email field is required"
+              })}
               placeholder="Enter your email address"
               className="w-full px-4 py-4 bg-[#F3F3F3] border-none rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
-              required
+              
             />
+            {
+              errors.email && (<p className="text-red-500 font-semibold">{errors.email.message}</p>)
+            }
           </div>
 
           <div className="mb-6">
@@ -29,11 +42,15 @@ const Login = () => {
             </label>
             <input
               type="password"
-              name="password"
+              {...register("password", {required: "password field is required"})}
               placeholder="Enter your password"
               className="w-full px-4 py-4 bg-[#F3F3F3] border-none rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
-              required
+              
             />
+            {errors.password && (
+              <p className="text-red-500 font-semibold">
+                {errors.password.message}
+              </p>)}
           </div>
 
           <button
