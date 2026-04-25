@@ -5,9 +5,10 @@ import React from 'react';
 
 const ActiveNav = ({children, href, className}) => {
   const pathName = usePathname()
-  const isActive =  pathName
+  const isActive =  pathName === href || (href === "/" && pathName.includes("/category/"));
+  
   return (
-  <Link href={href} className={`${className} border-2 text-center font-bold w-25 border-black shadow-md rounded px-4 py-2 ${isActive === href && 'bg-green-300'} `}>
+  <Link href={href} className={`${className} border-2 text-center font-bold w-25 border-black shadow-md rounded px-4 py-2 ${isActive? 'bg-green-300' : ''} `}>
   {children}
   </Link>
   );

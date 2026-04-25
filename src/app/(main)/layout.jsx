@@ -1,4 +1,4 @@
-import BreakingNews from '@/components/breakingNews/BreakingNews';
+import BreakingNews from '@/components/shared/breakingNews/BreakingNews';
 import Header from '@/components/shared/header/Header';
 import Navbar from '@/components/shared/navbar/Navbar';
 import React from 'react';
