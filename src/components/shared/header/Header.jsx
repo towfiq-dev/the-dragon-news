@@ -1,13 +1,13 @@
-import React from 'react';
 import Image from 'next/image';
-import HeaderLogo from '../../../assets/asset/logo.png'
+import React from 'react';
+import logo from '../../../assets/asset/logo.png'
 import { format } from 'date-fns';
 const Header = () => {
   return (
-    <div className='text-center mt-5 space-y-2'>
-      <Image className='mx-auto' width={485} height={50} src={HeaderLogo} alt='HeaderLogo'></Image>
-      <p>Journalism Without Fear or Favour</p>
-      <p>{format(new Date(), "EEE, MMM/dd/yyyy")}</p>
+    <div className='mt-7 space-y-2'>
+      <Image className='mx-auto' src={logo} alt={logo}></Image>
+      <p className='text-center text-gray-500 text-[18px]'>Journalism Without Fear or Favour</p>
+      <p className='text-center font-bold text-[20px]'>{format(new Date(), "EEEE, MMM-dd, yyyy")}</p>
     </div>
   );
 };

@@ -1,14 +1,13 @@
 import Navbar from '@/components/shared/navbar/Navbar';
 import React from 'react';
-import { geistMono } from '../layout';
 
-const AuthLayouts = ({children}) => {
+const AuthLayout = ({children}) => {
   return (
-    <div className={`${geistMono}`}>
-      <Navbar></Navbar>
+    <div>
+      <Navbar/>
       {children}
     </div>
   );
 };
 
-export default AuthLayouts;
+export default AuthLayout;

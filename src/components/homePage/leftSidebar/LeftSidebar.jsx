@@ -1,20 +1,30 @@
 import Link from 'next/link';
 import React from 'react';
-
-const LeftSidebar = ({newsCategories, activeId}) => {
+const AllCategory = async()=>{
+  const res = await fetch('https://openapi.programming-hero.com/api/news/categories')
+  const data = await res.json()
+  return data.data
+}
+const LeftSidebar = async() => {
+  const allCategories = await AllCategory()
+  const allCategory = allCategories.news_category
   return (
-          <ul className='space-y-4'>
-          {
-            newsCategories.map((newsCategory)=>{
-              const {category_name, category_id } = newsCategory
-              return(
-          
-              <Link href={`/category/${category_id}`} key={category_id}>
-              <button className={`btn w-50 shadow-md text-semi-bold text-[17px] ${activeId === category_id && 'bg-green-500'}`}>{category_name}</button>
-              </Link>
-            )})
-          }
-        </ul>
+    <div>
+      <h3 className='font-semibold text-[20px] mb-4'>All Category</h3>
+      <div>
+        {
+          allCategory.map((category)=> {
+            const {category_id, category_name} = category
+            return(
+          <ul key={category_id}>
+          <li className='border-1 font-semibold border-black px-4 py-2 btn mb-3 w-40'>
+            <Link href={'/'} >{category_name}</Link>
+          </li>
+          </ul>
+          )})
+        }
+      </div>
+    </div>
   );
 };
 
