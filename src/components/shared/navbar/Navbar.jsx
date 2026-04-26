@@ -1,8 +1,10 @@
-import React from 'react';
+'use client'
 import ActiveNav from './ActiveNav';
 import Image from 'next/image';
 import Logo from '../../../assets/asset/user.png'
+import { authClient, signOut } from '@/lib/auth-client';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 const Navbar = () => {
   const links = 
   <div className='flex justify-center gap-6'>
@@ -10,6 +12,26 @@ const Navbar = () => {
     <ActiveNav href={'/about'}>About</ActiveNav>
     <ActiveNav href={'/career'}>Career</ActiveNav>
   </div>
+  
+  const {data: session, isPending} = authClient.useSession()
+  if (isPending) {
+    return(
+      <div className="flex min-h-[calc(100vh-200px)] flex-col items-center justify-center gap-4">
+      <span className="loading loading-bars w-20 text-primary"></span>
+      
+      <p className="text-lg font-medium text-gray-500 animate-pulse">
+        Loading please wait...
+      </p>
+    </div>
+    )
+  }
+  //console.log(session, 'session');
+  const user = session?.user
+  const logOut=()=>{
+    authClient.signOut()
+    toast.success('Sign Out successfully')
+  }
+
   return (
   <div className='mt-8 mb-10'>
     <div className="navbar">
@@ -24,7 +46,10 @@ const Navbar = () => {
         {links}
       </ul>
     </div>
-    <Image src={Logo} className='cursor-pointer' alt='Logo'></Image>
+    <div>
+      <p className='font-semibold text-center'>{user? user.name: ''}</p>
+    <Image width={100} height={100} src={user? user.image : Logo} className='cursor-pointer rounded-full w-7 h-10' alt='Logo'></Image>
+    </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -32,7 +57,11 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link href={''} className="btn btn-primary font-bold w-25">Log Out</Link>
+    {
+      user? <button onClick={()=> logOut()} className="btn btn-primary font-bold w-25">Log Out</button>
+      :
+      <Link href={'/auth/signin'} className='btn btn-primary'>Log In</Link>
+    }
   </div>
   </div>
   </div>

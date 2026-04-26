@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -6,20 +7,39 @@ import swimmingImg from '../../../assets/asset/Group 48095482.png'
 import classImg from '../../../assets/asset/Group 48095480-1.png'
 import playgroundImg from '../../../assets/asset/Group 48095481.png'
 import bgImg from '../../../assets/asset/Group 48095485.png';
+import { authClient } from '@/lib/auth-client';
 const RightSidebar = () => {
+  const handleGoogleSignin =async()=>{
+    const data = await authClient.signIn.social({
+      provider: "google"
+    })
+    console.log(data, 'data');
+    
+  }
+
+    const handleGithubSignin =async()=>{
+    const data = await authClient.signIn.social({
+      provider: "github"
+    })
+    console.log(data, 'data');
+  }
   return (
     <div>
       {/* Register */}
       <div className=''>
       <h3 className='font-semibold text-[20px] mb-4'>Register With</h3>
-      <Link href={'/auth/signup'} className='flex text-[17px] btn btn-primary justify-center items-center gap-2 px-5 py-2 mb-3'>
+      <div 
+      //href={'/auth/signup'} 
+      className='flex text-[17px] btn btn-primary justify-center items-center gap-2 px-5 py-2 mb-3'>
       <FaGoogle />
-      <button className='cursor-pointer'>Register with Google</button>
-      </Link>
-      <Link href={'/auth/github'} className='flex text-[17px] btn btn-primary justify-center items-center gap-2 px-5 py-2'>
+      <button onClick={handleGoogleSignin} className='cursor-pointer'>Register with Google</button>
+      </div>
+      <div 
+      //href={'/auth/github'} 
+      className='flex text-[17px] btn btn-primary justify-center items-center gap-2 px-5 py-2'>
       <FaGithub />
-      <button className='cursor-pointer'>Register with Github</button>
-      </Link>
+      <button className='cursor-pointer' onClick={handleGithubSignin}>Register with Github</button>
+      </div>
       </div>
       {/* 2. Find Us On */}
       <div className='mt-7'>

@@ -2,10 +2,13 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const [show, setShow] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm();
   const router = useRouter()
   const onSubmit = async(data)=>{
@@ -56,12 +59,17 @@ const Login = () => {
               Password
             </label>
             <input
-              type="password"
+              type={show? 'text' : 'password'}
               {...register("password", {required: "password field is required"})}
               placeholder="Enter your password"
               className="w-full px-4 py-4 bg-[#F3F3F3] border-none rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
               
             />
+            <span className="cursor-pointer w-8" onClick={()=>setShow(!show)}>
+              {
+                show? <FaEye/>: <FaEyeSlash/>
+              }
+            </span>
             {errors.password && (
               <p className="text-red-500 font-semibold">
                 {errors.password.message}
