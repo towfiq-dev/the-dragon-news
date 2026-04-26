@@ -16,7 +16,6 @@ const Login = () => {
   const {data: res, error} = await authClient.signIn.email({
     email: email,
     password: password,
-    //callbackURL: '/'
   })
 
   if(res){

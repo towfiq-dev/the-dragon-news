@@ -1,19 +1,3 @@
-// import { NextResponse } from "next/server";
-
-// export function proxy(request) {
-//   const isLoggedIn = true
-
-//   if (isLoggedIn) {
-//     return NextResponse.redirect(new URL('/auth/signin', request.url))
-// }
-//   }
-
-// export const config = {
-//   matcher: ['/career', '/about']
-// }
-
-// import dns from "node:dns";
-// dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import dns from 'dns'
 dns.setDefaultResultOrder('ipv4first')
 import { NextResponse } from "next/server";
