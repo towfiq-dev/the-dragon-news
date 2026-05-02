@@ -8,20 +8,31 @@ import classImg from '../../../assets/asset/Group 48095480-1.png'
 import playgroundImg from '../../../assets/asset/Group 48095481.png'
 import bgImg from '../../../assets/asset/Group 48095485.png';
 import { authClient } from '@/lib/auth-client';
+import { toast } from 'react-toastify';
 const RightSidebar = () => {
   const handleGoogleSignin =async()=>{
     const data = await authClient.signIn.social({
-      provider: "google"
+      provider: "google",
+      callbackURL: '/'
     })
-    console.log(data, 'data');
+    if (data) {
+      toast.success('SignIn Successful')
+    }else{
+      toast.error('something went wrong.')
+    }
     
   }
 
     const handleGithubSignin =async()=>{
     const data = await authClient.signIn.social({
-      provider: "github"
+      provider: "github",
+      callbackURL: '/'
     })
-    console.log(data, 'data');
+    if (data) {
+      toast.success('SignIn Successful')
+    }else{
+      toast.error('something went wrong.')
+    }
   }
   return (
     <div>
